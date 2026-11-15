@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b2a6f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="المختبرات الطبية A&amp;B">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>جدول محاضرات كروب A و B – المرحلة الثانية 2026-2027</title>
 <meta name="description" content="جدول المحاضرات النظرية والعملية لكروبات A و B – تقنيات المختبرات الطبية – المرحلة الثانية – جامعة المعارف">
 <meta property="og:type" content="website">
@@ -100,6 +107,17 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Tahoma
 .gg button:active{transform:scale(.96)}
 .gg b{display:block;font-size:26px;color:var(--gc)}
 .gg i{display:block;font-style:normal;font-size:12px;color:var(--mu);margin-top:4px}
+
+[hidden]{display:none!important}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px 16px;box-shadow:var(--sh);margin-bottom:12px;line-height:1.9}
+.card h4{margin:0;font-size:15px}.card small{color:var(--mu);font-size:11px}
+.card p{margin:6px 0 0;white-space:pre-wrap;font-size:14px}
+.fl{display:flex;justify-content:space-between;align-items:center;gap:8px}
+input,select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:10px;margin:6px 0}
+textarea{min-height:260px;direction:ltr;font-family:monospace;font-size:11px}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.r{background:#dc2626}.btn.g{background:var(--mu)}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs .btn{flex:1;padding:10px 4px;font-size:12px}
 </style>
 </head>
 <body>
@@ -151,10 +169,11 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Tahoma
   <div class="bd" id="lo"></div>
 </section>
 
+
 <div class="cr"><a href="https://t.me/x29_m1" target="_blank" rel="noopener">تصميم وتطوير الموقع: مصطفى مهند حامد · <b>@x29_m1</b></a></div>
 
 <script>
-var TM=[["8:30","10:00",510,600,"ص","ص"],["10:00","11:30",600,690,"ص","ص"],["11:30","1:00",690,780,"ص","م"],["1:00","2:30",780,870,"م","م"]];
+var TM=[["8:30","9:30",510,570,"ص","ص"],["9:30","10:30",570,630,"ص","ص"],["10:30","11:30",630,690,"ص","ص"],["11:30","12:30",690,750,"ص","م"]];
 var DN=["السبت","الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس"];
 var DE=["🌅","📘","🧪","🔬","📊","🎓"];
 var SJ={
@@ -171,7 +190,7 @@ var LC={par:["م.م. سمية ناظم محمد","M-002"],bac:["م.م. محمو�
 // نظري: [يوم, وقت, مادة, تدريسي, قاعة]
 var TH={
 A:[[0,1,"his","م.م. بلال عبد المجيد","M-114"],[0,0,"phy","أ.د. عبد علي ذاكر","M-214"],[1,0,"bac","م.د. محمد جمال منصور","M-114"],[1,3,"bio","م.م. محمد هاشم محمد","M-114"],[3,1,"par","م.م. محمود ياسين مخلف","B-102"],[4,0,"sta","أ.د. حمدي جاسم حمادي","M-214"]],
-B:[[0,2,"his","م.م. بلال عبد المجيد","M-214"],[1,1,"bio","م.م. محمد هاشم محمد","M-114"],[1,2,"phy","أ.د. عبد علي ذاكر","M-114"],[3,0,"par","م.م. محمود ياسين مخلف","M-214"],[3,2,"bac","م.د. محمد جمال منصور","M-214"],[4,2,"sta","أ.د. حمدي جاسم حمادي","M-214"]]
+B:[[0,2,"his","م.م. بلال عبد المجيد","M-114"],[1,1,"bio","م.م. محمد هاشم محمد","M-114"],[1,2,"phy","أ.د. عبد علي ذاكر","M-114"],[3,0,"par","م.م. محمود ياسين مخلف","M-214"],[3,2,"bac","م.د. محمد جمال منصور","M-214"],[4,2,"sta","أ.د. حمدي جاسم حمادي","M-214"]]
 };
 var CM=[[5,1,"cri","","أونلاين"],[5,2,"ara","","أونلاين"]];
 // عملي: [يوم, مادة, [كروب الوقت0..3]]
@@ -213,19 +232,19 @@ function build(g){
   PR.forEach(function(p){p[2].forEach(function(x,t){if(x===g)o.push([p[0],t,p[1],LC[p[1]][0],(p[1]==="par"&&p[0]===2)?"M-001":LC[p[1]][1],1])})});
   return o;
 }
-function show(id){["w","g","s","l"].forEach(function(x){document.getElementById(x).classList.toggle("on",x===id)});window.scrollTo(0,0)}
+function show(id){CUR=id;["w","g","s","l"].forEach(function(x){document.getElementById(x).classList.toggle("on",x===id)});window.scrollTo(0,0)}
 function ls(i){return SG.filter(function(r){return r[0]===i}).sort(function(a,b){return a[1]-b[1]})}
 document.getElementById("wg").textContent=h<12?"صباح النور ☀️":h<17?"طاب يومك 🌤️":"مساء الخير 🌙";
 document.getElementById("tn").textContent=TD<0?"🕌 الجمعة مباركة، استمتع بإجازتك":"📍 اليوم "+DN[TD];
 // شاشة الكروبات
-var go=document.getElementById("go");
+function buildGroups(){var go=document.getElementById("go");go.innerHTML="";
 [["A","#2563eb","🅰️"],["B","#7c3aed","🅱️"]].forEach(function(x){
   var hd=document.createElement("div");hd.className="gh";hd.style.setProperty("--gc",x[1]);
   hd.innerHTML="<span>"+x[0]+"</span><div>شعبة "+x[0]+"<br><small>اختار كروبك الفرعي</small></div>";go.appendChild(hd);
   var gg=document.createElement("div");gg.className="gg";gg.style.setProperty("--gc",x[1]);
   for(var n=1;n<=4;n++)(function(g){var b=document.createElement("button");b.innerHTML="<b>"+g+"</b><i>"+build(g).length+" محاضرة بالأسبوع</i>";b.onclick=function(){pick(g)};gg.appendChild(b)})(x[0]+n);
   go.appendChild(gg);
-});
+});}buildGroups();
 function pick(g){
   G=g;SG=build(g);
   document.getElementById("st").textContent="جدول كروب "+g;
@@ -240,7 +259,7 @@ function pick(g){
   });
   show("s");
 }
-function open_(D){
+function open_(D){LD=D;
   var o=document.getElementById("lo"),L=ls(D);o.innerHTML="";
   document.getElementById("lt").textContent="محاضرات "+DN[D]+" · "+G;
   document.getElementById("ls").textContent=L.length?L.length+" محاضرات · من "+TM[L[0][1]][0]+" "+TM[L[0][1]][4]+" إلى "+TM[L[L.length-1][1]][1]+" "+TM[L[L.length-1][1]][5]:"يوم راحة";
@@ -253,11 +272,12 @@ function open_(D){
     o.innerHTML+='<div class="row" style="animation-delay:'+k*70+'ms"><div class="tc"><small>من</small><b>'+t[0]+'</b><em>'+t[4]+'</em><i></i><small>إلى</small><b>'+t[1]+'</b><em>'+t[5]+'</em></div>'
     +'<div class="c'+(live?' now':'')+'" style="--k:'+s[3]+'">'+(live?'<span class="lv">● جارية الآن</span>':'')
     +'<div class="hh"><div class="ico">'+s[0]+'</div><div><div class="nm">'+s[1]+'</div><div class="en">'+s[2]+'</div></div></div>'
-    +'<div class="mt"><span class="pill t">'+(r[5]?'🧫 عملي':'📘 نظري')+'</span><span class="pill">'+(r[4]==='أونلاين'?'💻 أونلاين':'📍 القاعة '+r[4])+'</span>'+(r[3]?'<span class="pill">👤 '+r[3]+'</span>':'')+'<span class="pill">⏱ ساعة ونصف</span></div></div></div>';
+    +'<div class="mt"><span class="pill t">'+(r[5]?'🧫 عملي':'📘 نظري')+'</span><span class="pill">'+(r[4]==='أونلاين'?'💻 أونلاين':'📍 القاعة '+r[4])+'</span>'+(r[3]?'<span class="pill">👤 '+r[3]+'</span>':'')+'<span class="pill">⏱ ساعة واحدة</span></div></div></div>';
   });
   o.innerHTML+='<div class="mo"><div id="mq">'+nq()+'</div><button onclick=\"document.getElementById(\'mq\').textContent=nq()\">رسالة جديدة ✨</button></div>';
   show("l");
 }
+var CUR="w",LD=0;
 </script>
 </body>
 </html>
